@@ -10,10 +10,12 @@ import { EmptyTodos } from '../EmptyTodos';
 import { TodoForm } from '../TodoForm';
 import { CreateTodoButton } from '../CreateTodoButton';
 import { Modal } from '../Modal';
+import { EmptySearchResults } from '../EmptySearchResults';
 
 function AppUI() {
   const {
     error,
+    totalTodos,
     loading,
     searchedTodos,
     completeTodo,
@@ -32,7 +34,8 @@ function AppUI() {
         {error && <TodosError />}
         {loading && <TodosLoading />}
         {/* Si loading es falso y searchedTodos es 0 renderiza EmptyTodos*/}
-        {!loading && !searchedTodos.length && <EmptyTodos />}
+        {!loading && !totalTodos && <EmptyTodos />}
+        {!!totalTodos && !searchedTodos.length && <EmptySearchResults />}
 
         {searchedTodos.map((todo) => (
           <TodoItem
